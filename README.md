@@ -10,7 +10,7 @@ Implemented **Expectation-Maximization from scratch** (no scikit-learn) on Galto
 | 1 | 66.40 | 69.52 | 9.70 | 7.39 | 0.497 | 0.503 | −4873.52 |
 | 2 | 66.37 | 69.53 | 10.23 | 6.76 | 0.494 | 0.506 | −4869.37 |
 
-**Draw a line at the mean? No.** It ignores the overlap, unequal variances, and unequal priors; pile-means are biased by stolen tails. The twist: fathers/children are only ~2.5″ apart, so the data is near-unimodal and EM (maximising *likelihood*, not accuracy) finds a broad + narrow fit that doesn't recover the true split — neither method separates well. **Mixtures separate only what is separable.** On a controlled separable case, EM hit 99% vs the naive 91%.
+**Draw a line at the mean? No.** It ignores the overlap, unequal variances, and unequal priors; pile-means are biased by stolen tails. The twist: fathers/children are only ~2.5″ apart, so the data is near-unimodal and EM (maximising *likelihood*, not accuracy) finds a broad + narrow fit that doesn't recover the true split. Neither method separates well. **Mixtures separate only what is separable.** On a controlled separable case, EM hit 99% vs the naive 91%.
 
 `classify(height)` outputs live posteriors: P(child) vs P(taller class).
 
@@ -34,7 +34,7 @@ Update: `m ← m − α∇ₘ`, `b ← b − α∇_b`.
 | `m₁` | `[−1.45, 0.87]` |
 | `b₁` | `0.88` |
 
-→ passed to Iteration 2: `m = [−1.45, 0.87]`, `b = 0.88`.
+passed to Iteration 2: `m = [−1.45, 0.87]`, `b = 0.88`.
 
 > Note: no learning rate was given in the brief; adopted the standard `α = 0.01` (≥ 0.02 diverges).
 
