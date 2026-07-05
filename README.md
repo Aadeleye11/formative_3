@@ -1,5 +1,3 @@
-# Ayomide — Contributions (Parts 1 & 3)
-
 ## Part 1 — EM Algorithm (Gaussian Mixture)
 
 Implemented **Expectation-Maximization from scratch** (no scikit-learn) on Galton father + child heights, labels hidden. Functions map to the math: `e_step`, `m_step`, `log_likelihood`.
