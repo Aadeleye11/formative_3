@@ -1,3 +1,46 @@
+# Ayomide — Contributions (Parts 1 & 3)
+
+## Part 1 — EM Algorithm (Gaussian Mixture)
+
+Implemented **Expectation-Maximization from scratch** (no scikit-learn) on Galton father + child heights, labels hidden. Functions map to the math: `e_step`, `m_step`, `log_likelihood`.
+
+**Tracking table (init + first 2 iterations):**
+
+| Iter | μ₁ | μ₂ | σ₁² | σ₂² | π₁ | π₂ | Log-Lik |
+|---|---|---|---|---|---|---|---|
+| 0 | 66.00 | 70.00 | 10.96 | 10.96 | 0.500 | 0.500 | −4930.52 |
+| 1 | 66.40 | 69.52 | 9.70 | 7.39 | 0.497 | 0.503 | −4873.52 |
+| 2 | 66.37 | 69.53 | 10.23 | 6.76 | 0.494 | 0.506 | −4869.37 |
+
+**Draw a line at the mean? No.** It ignores the overlap, unequal variances, and unequal priors; pile-means are biased by stolen tails. The twist: fathers/children are only ~2.5″ apart, so the data is near-unimodal and EM (maximising *likelihood*, not accuracy) finds a broad + narrow fit that doesn't recover the true split — neither method separates well. **Mixtures separate only what is separable.** On a controlled separable case, EM hit 99% vs the naive 91%.
+
+`classify(height)` outputs live posteriors: P(child) vs P(taller class).
+
+## Part 3 — Gradient Descent (Manual): Setup + Iteration 1
+
+Model `y = m₁x₁ + m₂x₂ + b`, matrix form throughout.
+`X = [[1,3],[4,10]]`, targets `[5,6]`, `m = [−1,2]`, `b = 1`, `α = 0.01`, `n = 2`.
+
+**Gradient:** `J = (1/n) Σ (yᵢ − targetᵢ)²`, `e = y − target` →
+`∂J/∂m = (2/n)·Xᵀe`, `∂J/∂b = (2/n)·Σeᵢ`. Since `n = 2`, `2/n = 1`, so `∇ₘ = Xᵀe`, `∇_b = Σeᵢ`.
+Update: `m ← m − α∇ₘ`, `b ← b − α∇_b`.
+
+**Iteration 1** (m = [−1,2], b = 1):
+
+| Step | Result |
+|---|---|
+| `y = Xm + b` | `[6, 17]` |
+| `e = y − target` | `[1, 11]` |
+| `∇ₘ = Xᵀe` | `[45, 113]` |
+| `∇_b = Σeᵢ` | `12` |
+| `m₁` | `[−1.45, 0.87]` |
+| `b₁` | `0.88` |
+
+→ passed to Iteration 2: `m = [−1.45, 0.87]`, `b = 0.88`.
+
+> Note: no learning rate was given in the brief; adopted the standard `α = 0.01` (≥ 0.02 diverges).
+
+
 ## Part 3: Gradient Descent Manual Calculation
 
 ### Objective
