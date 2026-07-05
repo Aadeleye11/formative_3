@@ -13,6 +13,75 @@ Implemented **Expectation-Maximization from scratch** (no scikit-learn) on Galto
 **Draw a line at the mean? No.** It ignores the overlap, unequal variances, and unequal priors; pile-means are biased by stolen tails. The twist: fathers/children are only ~2.5″ apart, so the data is near-unimodal and EM (maximising *likelihood*, not accuracy) finds a broad + narrow fit that doesn't recover the true split. Neither method separates well. **Mixtures separate only what is separable.** On a controlled separable case, EM hit 99% vs the naive 91%.
 
 `classify(height)` outputs live posteriors: P(child) vs P(taller class).
+# Part 2: Bayesian Probability – IMDb Movie Reviews
+
+## Overview
+
+In this part of the project, we applied **Bayes' Theorem** to predict whether a movie review is **positive** based on the presence of specific keywords. We used the **IMDb Movie Reviews Dataset** and implemented the solution using **basic Python only**, without any machine learning libraries.
+
+## Objective
+
+Our goal was to calculate the probability that a review is positive given that it contains a particular keyword:
+
+[
+P(\text{Positive} \mid \text{Keyword})
+]
+
+We selected the following positive keywords:
+
+* **excellent**
+* **amazing**
+* **wonderful**
+
+## Bayes' Theorem
+
+We used the formula:
+
+[
+P(\text{Positive}|\text{Keyword})=
+\frac{P(\text{Keyword}|\text{Positive}) \times P(\text{Positive})}
+{P(\text{Keyword})}
+]
+
+Where:
+
+* **Prior –** (P(\text{Positive})): The probability that any review is positive.
+* **Likelihood –** (P(\text{Keyword}|\text{Positive})): The probability that a positive review contains the selected keyword.
+* **Marginal –** (P(\text{Keyword})): The probability that the keyword appears in all reviews.
+* **Posterior –** (P(\text{Positive}|\text{Keyword})): The final probability that a review is positive if it contains the keyword.
+
+## Results
+Prior P(Positive) = 0.5000
+
+----------------------------------------------------------------------
+Keyword     P(keyword|Positive)   P(keyword)        P(Positive|keyword)
+----------------------------------------------------------------------
+excellent   0.1147                0.0710            0.8074
+amazing     0.0672                0.0432            0.7780
+wonderful   0.0903                0.0556            0.8122
+
+| Keyword   | Posterior Probability |
+| --------- | --------------------: |
+| excellent |                80.74% |
+| amazing   |                77.80% |
+| wonderful |                81.22% |
+
+These results show that reviews containing these words are highly likely to express positive sentiment.
+
+## Implementation
+
+Our Python program:
+
+1. Loaded the IMDb dataset.
+2. Counted positive reviews to calculate the **Prior**.
+3. Counted how often each keyword appeared in positive reviews to calculate the **Likelihood**.
+4. Counted how often each keyword appeared in all reviews to calculate the **Marginal**.
+5. Applied **Bayes' Theorem** to compute the **Posterior Probability** for each keyword.
+
+## Conclusion
+
+Bayesian Probability allows us to make predictions based on evidence. In this project, we showed that a single keyword can significantly influence the probability that a movie review is positive. This demonstrates how Bayes' Theorem forms the foundation of many text classification and spam filtering systems while using only simple probability calculations.
+
 
 
 ## Part 3: Gradient Descent Manual Calculation
