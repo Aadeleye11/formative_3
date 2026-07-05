@@ -14,30 +14,6 @@ Implemented **Expectation-Maximization from scratch** (no scikit-learn) on Galto
 
 `classify(height)` outputs live posteriors: P(child) vs P(taller class).
 
-## Part 3 — Gradient Descent (Manual): Setup + Iteration 1
-
-Model `y = m₁x₁ + m₂x₂ + b`, matrix form throughout.
-`X = [[1,3],[4,10]]`, targets `[5,6]`, `m = [−1,2]`, `b = 1`, `α = 0.01`, `n = 2`.
-
-**Gradient:** `J = (1/n) Σ (yᵢ − targetᵢ)²`, `e = y − target` →
-`∂J/∂m = (2/n)·Xᵀe`, `∂J/∂b = (2/n)·Σeᵢ`. Since `n = 2`, `2/n = 1`, so `∇ₘ = Xᵀe`, `∇_b = Σeᵢ`.
-Update: `m ← m − α∇ₘ`, `b ← b − α∇_b`.
-
-**Iteration 1** (m = [−1,2], b = 1):
-
-| Step | Result |
-|---|---|
-| `y = Xm + b` | `[6, 17]` |
-| `e = y − target` | `[1, 11]` |
-| `∇ₘ = Xᵀe` | `[45, 113]` |
-| `∇_b = Σeᵢ` | `12` |
-| `m₁` | `[−1.45, 0.87]` |
-| `b₁` | `0.88` |
-
-passed to Iteration 2: `m = [−1.45, 0.87]`, `b = 0.88`.
-
-> Note: no learning rate was given in the brief; adopted the standard `α = 0.01` (≥ 0.02 diverges).
-
 
 ## Part 3: Gradient Descent Manual Calculation
 
