@@ -13,7 +13,8 @@ Implemented **Expectation-Maximization from scratch** (no scikit-learn) on Galto
 **Draw a line at the mean? No.** It ignores the overlap, unequal variances, and unequal priors; pile-means are biased by stolen tails. The twist: fathers/children are only ~2.5″ apart, so the data is near-unimodal and EM (maximising *likelihood*, not accuracy) finds a broad + narrow fit that doesn't recover the true split. Neither method separates well. **Mixtures separate only what is separable.** On a controlled separable case, EM hit 99% vs the naive 91%.
 
 `classify(height)` outputs live posteriors: P(child) vs P(taller class).
-# Part 2: Bayesian Probability – IMDb Movie Reviews
+
+# Part 2: Bayesian Probability (IMDb Movie Reviews)
 
 ## Overview
 
